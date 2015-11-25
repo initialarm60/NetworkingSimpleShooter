@@ -11,17 +11,14 @@ public class BMANetworkManager : NetworkLobbyManager {
 	private GameManager gameManager;
 
 	// Use this for initialization
-	void Start () {
-		print("NetworkManager: Start()");
-	}
+	void Start () {}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
-	
-	
-	// Server Specific
+	void Update () {}
+
+
+	// SERVER:
+
 	public void OnLobbyServerConnent(NetworkConnection conn) {
 		print("OnLobbyServerConnect with conn hostId:" + conn.hostId);
 	}
@@ -29,14 +26,7 @@ public class BMANetworkManager : NetworkLobbyManager {
 	public void OnLobbyServerPlayersReady() {
 		print ("OnLobbyServerPlayersReady()");
 	}
-	/*
-	// Everyone is ready, setup the level
-	public override void OnLobbyServerPlayersReady() {
-		Debug ("OnLobbyServerPlayersReady()");
-		// change scene
-		ServerChangeScene (playScene);
-	}
-*/
+
 	public override void OnLobbyServerSceneChanged(string sceneName) {
 		print("OnLobbyServerSceneChanged" + sceneName);
 		//gameManager = GetComponent<GameManager> ();
@@ -48,11 +38,9 @@ public class BMANetworkManager : NetworkLobbyManager {
 	}
 	
 	public override bool OnLobbyServerSceneLoadedForPlayer(GameObject lobbyPlayer, GameObject gamePlayer) {
-		
 		return true;
 	}
-	
-	
+
 	// Client Specific
 	public override void OnLobbyClientSceneChanged(NetworkConnection conn) {
 		print("OnLobbyClientSceneChanged for conn with id" + conn.address);

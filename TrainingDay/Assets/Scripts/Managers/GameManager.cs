@@ -18,6 +18,7 @@ public class GameManager : NetworkBehaviour {
 
 	// GAME VARIABLES:
 
+	private PlayerHealth[] players;
 	private int numberOfTotalPlayers = 0;
 	private int numberOfLivingPlayers = 0;
 
@@ -26,18 +27,19 @@ public class GameManager : NetworkBehaviour {
 	// Use this for initialization
 	void Start () {
 		setupLobbyManager();
-		setupEnemyManger();
 		scoreManager = GetComponent<ScoreManager> ();
 	}
 
 	private void setupLobbyManager() {
-		lobbyManager = GetComponent<BMANetworkManager> ();
+		lobbyManager = FindObjectOfType<BMANetworkManager> ();
 		setNumberOfTotalPlayers (lobbyManager.numPlayers);
 		setNumberOfLivingPlayers (lobbyManager.numPlayers);
 	}
 
-	private void setupEnemyManger() {
-		enemyManager = GetComponent<EnemyManager> ();
+	public void setupEnemyManger(EnemyManager manager) {
+		enemyManager = manager;
+		players = new PlayerHealth[0];
+		enemyManager.setShouldSpawnEnemies (true);
 	}
 
 	// Update is called once per frame
@@ -62,6 +64,16 @@ public class GameManager : NetworkBehaviour {
 		numberOfLivingPlayers = players;
 	}
 
+	// When a player's player health script is run, it will add it to the gmea 
+	public void addPlayerHealthToGameManager(PlayerHealth player) {
+		PlayerHealth[] added = new PlayerHealth[players.Length + 1];
+		for (int index = 0; index < players.Length; index++) {
+			added[index] = players[index];
+		}
+		added [players.Length] = player;
+
+		players = added;
+	}
 
 	// Determines if the game is considered finished
 	public bool isGameOver() {
@@ -69,8 +81,9 @@ public class GameManager : NetworkBehaviour {
 	}
 
 	[ClientRpc]
-	public bool RpcGameOver() {
+	public void RpcGameOver() {
 		// game over manager show game over screen.
+
 	}
 
 	

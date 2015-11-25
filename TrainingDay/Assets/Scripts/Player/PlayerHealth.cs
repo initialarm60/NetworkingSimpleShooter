@@ -22,23 +22,33 @@ public class PlayerHealth : NetworkBehaviour
     bool damaged;
 
 
-	public override void OnStartLocalPlayer() {
+	void Start() {
+		// add the player to the manager
+
 		anim = GetComponent <Animator> ();
 		playerAudio = GetComponent <AudioSource> ();
+
+		currentHealth = startingHealth;
+	}
+
+	// meh, no reason to have the server hook this up
+	public override void OnStartLocalPlayer() {
+
+
 		playerMovement = GetComponent <PlayerMovement> ();
 		playerShooting = GetComponentInChildren <PlayerShooting> ();
-		currentHealth = startingHealth;
+
 	}
 
 	public void OnLevelWasLoaded(int i) {
 		levelWasLoaded = true;
-			Canvas myCanvas = (Canvas)FindObjectOfType(typeof(Canvas));//FindGameObjectWithTag("PlayerHUD");
-			damageImage = GameObject.Find ("HUDCanvas").GetComponent<Canvas> ().GetComponentInChildren<Image>();
+		Canvas myCanvas = (Canvas)FindObjectOfType(typeof(Canvas));
+		FindObjectOfType<GameManager> ().addPlayerHealthToGameManager (this);
+		damageImage = GameObject.Find ("HUDCanvas").GetComponent<Canvas> ().GetComponentInChildren<Image>();
 	}
 
 
-    void Update ()
-    {
+    void Update () {
 		if (levelWasLoaded) {
 			if (isLocalPlayer) {
 				if (damaged) {
@@ -52,41 +62,29 @@ public class PlayerHealth : NetworkBehaviour
     }
 
 
-    public void TakeDamage (int amount)
-    {
+    public void TakeDamage (int amount) {
         damaged = true;
-
         currentHealth -= amount;
-
         healthSlider.value = currentHealth;
-
         playerAudio.Play ();
-
-        if(currentHealth <= 0 && !isDead)
-        {
+        if(currentHealth <= 0 && !isDead) {
             Death ();
         }
     }
 
 
-    void Death ()
-    {
+    void Death () {
         isDead = true;
-
         playerShooting.DisableEffects ();
-
         anim.SetTrigger ("Die");
-
         playerAudio.clip = deathClip;
         playerAudio.Play ();
-
         playerMovement.enabled = false;
         playerShooting.enabled = false;
     }
 
 
-    public void RestartLevel ()
-    {
+    public void RestartLevel () {
         Application.LoadLevel (Application.loadedLevel);
     }
 }

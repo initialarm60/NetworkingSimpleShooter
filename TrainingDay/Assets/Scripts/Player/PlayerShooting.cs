@@ -18,7 +18,7 @@ public class PlayerShooting : NetworkBehaviour
     RaycastHit shootHit;
     int shootableMask;
 	Transform barrelEnd;
-
+	PlayerHealth health;
 	[SyncVar]
     ParticleSystem gunParticles;
 	[SyncVar]
@@ -32,6 +32,7 @@ public class PlayerShooting : NetworkBehaviour
 
 	public override void OnStartLocalPlayer() {
 		started = true;
+		health = GetComponent<PlayerHealth> ();
 		barrelEnd = findBarrelTip ();
 		shootableMask = LayerMask.GetMask ("Shootable");
 		gunParticles = GetComponentInChildren<ParticleSystem>();
@@ -95,7 +96,7 @@ public class PlayerShooting : NetworkBehaviour
             EnemyHealth enemyHealth = shootHit.collider.GetComponent <EnemyHealth> ();
             if(enemyHealth != null)
             {
-                enemyHealth.TakeDamage (damagePerShot, shootHit.point);
+                enemyHealth.TakeDamage (health, damagePerShot, shootHit.point);
             }
             gunLine.SetPosition (1, shootHit.point);
         }
