@@ -12,13 +12,15 @@ public class GameManager : NetworkBehaviour {
 	/// have access to the network manager to get information about the players
 	private BMANetworkManager lobbyManager;
 	// access to the enemy manager to spawn enemies
-	private EnemyManager enemyManager;
+	private BMAEnemyManager enemyManager;
 	// access to the score manager to update scores
 	private ScoreManager scoreManager;
 
+	private GameObject localPlayer;
+
 	// GAME VARIABLES:
 
-	private PlayerHealth[] players;
+	private PlayerHealth[] playerHealths;
 	private int numberOfTotalPlayers = 0;
 	private int numberOfLivingPlayers = 0;
 
@@ -26,20 +28,33 @@ public class GameManager : NetworkBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		setupLobbyManager();
+		getLobbyManager();
 		scoreManager = GetComponent<ScoreManager> ();
+		getPlayers();
 	}
-
-	private void setupLobbyManager() {
+	
+	private void getLobbyManager() {
 		lobbyManager = FindObjectOfType<BMANetworkManager> ();
 		setNumberOfTotalPlayers (lobbyManager.numPlayers);
 		setNumberOfLivingPlayers (lobbyManager.numPlayers);
 	}
 
-	public void setupEnemyManger(EnemyManager manager) {
+	private void getPlayers() {
+		GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
+		playerHealths = new PlayerHealth[players.Length];
+		for (int i = 0; i < players.Length; i++) {
+			PlayerHealth instance = players[i].GetComponentInChildren<PlayerHealth>();
+			if (instance.isLocalPlayer) {
+				instance.configurePlayerHud();
+				playerHealths[i] = instance;
+			}
+		}
+	}
+
+	public void setupEnemyManger(BMAEnemyManager manager) {
 		enemyManager = manager;
-		players = new PlayerHealth[0];
-		enemyManager.setShouldSpawnEnemies (true);
+		enemyManager.setPlayersToFollow(playerHealths);
+		enemyManager.startSpawningEnemies();
 	}
 
 	// Update is called once per frame
@@ -64,27 +79,15 @@ public class GameManager : NetworkBehaviour {
 		numberOfLivingPlayers = players;
 	}
 
-	// When a player's player health script is run, it will add it to the gmea 
-	public void addPlayerHealthToGameManager(PlayerHealth player) {
-		PlayerHealth[] added = new PlayerHealth[players.Length + 1];
-		for (int index = 0; index < players.Length; index++) {
-			added[index] = players[index];
-		}
-		added [players.Length] = player;
-
-		players = added;
-	}
-
 	// Determines if the game is considered finished
 	public bool isGameOver() {
 		return numberOfTotalPlayers - numberOfLivingPlayers <= 0;
 	}
 
+	/// Have the clients run the game over scenario.
 	[ClientRpc]
 	public void RpcGameOver() {
 		// game over manager show game over screen.
 
 	}
-
-	
 }

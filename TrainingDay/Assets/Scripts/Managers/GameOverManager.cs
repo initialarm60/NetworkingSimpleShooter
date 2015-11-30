@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityEngine.Networking;
 
-public class GameOverManager : MonoBehaviour
+public class GameOverManager : NetworkBehaviour
 {
     public PlayerHealth playerHealth;
 	public float restartDelay = 5f;
@@ -9,10 +10,13 @@ public class GameOverManager : MonoBehaviour
 	float restartTimer;
 
 
-    void Awake()
-    {
-        anim = GetComponent<Animator>();
-    }
+    void Awake() {
+		anim = GetComponent<Animator> ();
+
+		if (isLocalPlayer) {
+
+		}
+	}
 
 
     void Update()

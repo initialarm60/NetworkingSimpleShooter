@@ -37,9 +37,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
---- !u!127 &3
-LevelGameManager:
-  m_ObjectHideFlags: 0
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -68,6 +65,7 @@ LightmapSettings:
     m_TextureCompression: 1
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
+    m_ReflectionCompression: 2
   m_LightmapSnapshot: {fileID: 0}
   m_RuntimeCPUUsage: 25
 --- !u!196 &5
@@ -155,6 +153,7 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
+  m_TargetEye: 3
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -228,9 +227,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NetworkPort: 7777
+  m_ServerBindToIP: 0
+  m_ServerBindAddress: 
   m_NetworkAddress: localhost
   m_DontDestroyOnLoad: 1
   m_RunInBackground: 1
+  m_ScriptCRCCheck: 1
   m_SendPeerInfo: 0
   m_MaxDelay: .00999999978
   m_LogLevel: 2
@@ -239,7 +241,10 @@ MonoBehaviour:
   m_PlayerSpawnMethod: 0
   m_OfflineScene: LobbyScene
   m_OnlineScene: 
-  m_SpawnPrefabs: []
+  m_SpawnPrefabs:
+  - {fileID: 104722, guid: 2f8e5dcb17eda3542bf9cd4ef63425e3, type: 2}
+  - {fileID: 133892, guid: 03e8c7aae5c3e2e4d84a599794c54633, type: 2}
+  - {fileID: 100000, guid: ffdde77c7de2ec246907b187471ed7d0, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -261,7 +266,8 @@ MonoBehaviour:
     m_MaxSentMessageQueueSize: 128
     m_IsAcksLong: 0
     m_Channels: []
-  m_Channels: 
+  m_Channels: 0500000000000000
+  m_UseWebSockets: 0
   m_UseSimulator: 0
   m_SimulatedLatency: 1
   m_PacketLossPercentage: 0
@@ -274,6 +280,7 @@ MonoBehaviour:
   m_ShowLobbyGUI: 1
   m_MaxPlayers: 4
   m_MaxPlayersPerConnection: 1
+  m_MinPlayers: 0
   m_LobbyPlayerPrefab: {fileID: 11440628, guid: ce102e7c66dd42c4a883969f5e405282,
     type: 2}
   m_GamePlayerPrefab: {fileID: 167554, guid: d2f7a93eca49599489bff4adb85851cc, type: 2}

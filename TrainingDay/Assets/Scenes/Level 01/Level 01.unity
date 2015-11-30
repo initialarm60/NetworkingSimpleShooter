@@ -37,9 +37,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
---- !u!127 &3
-LevelGameManager:
-  m_ObjectHideFlags: 0
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -68,6 +65,7 @@ LightmapSettings:
     m_TextureCompression: 1
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
+    m_ReflectionCompression: 2
   m_LightmapSnapshot: {fileID: 0}
   m_RuntimeCPUUsage: 25
 --- !u!196 &5
@@ -136,6 +134,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 46238fb1ad7a7a84ba8954c1c860994c, type: 3}
     m_FontSize: 50
@@ -229,6 +233,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -273,6 +283,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: .984313786, g: .984313786, b: .984313786, a: 0}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -423,6 +439,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: ac394e6e5080d754e8b437e5936fca3b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -514,7 +536,7 @@ MonoBehaviour:
   m_Script: {fileID: 1997211142, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AllowActivationOnStandalone: 0
+  m_ForceModuleActive: 0
 --- !u!114 &496571990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -532,7 +554,7 @@ MonoBehaviour:
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: .5
-  m_AllowActivationOnMobileDevice: 0
+  m_ForceModuleActive: 0
 --- !u!114 &496571991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -649,6 +671,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 46238fb1ad7a7a84ba8954c1c860994c, type: 3}
     m_FontSize: 50
@@ -739,6 +767,7 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
+  m_TargetEye: 3
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -897,6 +926,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -1042,6 +1077,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 1
   Mute: 0
+  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -1155,6 +1191,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: .332179904, g: .789977252, b: .941176474, a: 0}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -1605,10 +1647,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1942955288}
+  - 114: {fileID: 1942955291}
   - 114: {fileID: 1942955287}
   - 114: {fileID: 1942955290}
   - 114: {fileID: 1942955289}
-  - 114: {fileID: 1942955291}
   m_Layer: 0
   m_Name: EnemyManager
   m_TagString: Untagged
@@ -1624,7 +1666,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1942955286}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99222b1e4a384e923ac7e86efc709, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b06133581cbf403bac649c5cfbda99c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 133892, guid: 03e8c7aae5c3e2e4d84a599794c54633, type: 2}
@@ -1654,13 +1696,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1942955286}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99222b1e4a384e923ac7e86efc709, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b06133581cbf403bac649c5cfbda99c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 104722, guid: 2f8e5dcb17eda3542bf9cd4ef63425e3, type: 2}
+  enemy: {fileID: 100000, guid: ffdde77c7de2ec246907b187471ed7d0, type: 2}
   spawnTime: 3
   spawnPoints:
-  - {fileID: 1203875846}
+  - {fileID: 1550669183}
 --- !u!114 &1942955290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1669,13 +1711,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1942955286}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a99222b1e4a384e923ac7e86efc709, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b06133581cbf403bac649c5cfbda99c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 100000, guid: ffdde77c7de2ec246907b187471ed7d0, type: 2}
+  enemy: {fileID: 104722, guid: 2f8e5dcb17eda3542bf9cd4ef63425e3, type: 2}
   spawnTime: 3
   spawnPoints:
-  - {fileID: 1550669183}
+  - {fileID: 1203875846}
 --- !u!114 &1942955291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1706,7 +1748,7 @@ MonoBehaviour:
     i13: 0
     i14: 0
     i15: 0
-  m_ServerOnly: 0
+  m_ServerOnly: 1
   m_LocalPlayerAuthority: 0
 --- !u!1 &1970951126
 GameObject:

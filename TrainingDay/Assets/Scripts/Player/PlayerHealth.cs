@@ -20,33 +20,32 @@ public class PlayerHealth : NetworkBehaviour
     PlayerShooting playerShooting;
     bool isDead;
     bool damaged;
-
-
+	
 	void Start() {
 		// add the player to the manager
-
 		anim = GetComponent <Animator> ();
 		playerAudio = GetComponent <AudioSource> ();
-
 		currentHealth = startingHealth;
 	}
 
 	// meh, no reason to have the server hook this up
 	public override void OnStartLocalPlayer() {
-
-
 		playerMovement = GetComponent <PlayerMovement> ();
 		playerShooting = GetComponentInChildren <PlayerShooting> ();
-
 	}
 
-	public void OnLevelWasLoaded(int i) {
+	// HACK: no clue why the player is created before the scene
+	// so instead of reading, just setting this from the game manager
+	public void configurePlayerHud() {
 		levelWasLoaded = true;
 		Canvas myCanvas = (Canvas)FindObjectOfType(typeof(Canvas));
-		FindObjectOfType<GameManager> ().addPlayerHealthToGameManager (this);
 		damageImage = GameObject.Find ("HUDCanvas").GetComponent<Canvas> ().GetComponentInChildren<Image>();
 	}
 
+	/// Determines if the instance of PlayerHealth is the local instance
+	public bool isLocalInstance() {
+		return (isLocalPlayer ? true : false);
+	}
 
     void Update () {
 		if (levelWasLoaded) {

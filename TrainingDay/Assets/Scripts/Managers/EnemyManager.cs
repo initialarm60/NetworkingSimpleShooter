@@ -2,32 +2,34 @@
 using UnityEngine.Networking;
 using System.Collections.Generic;
 
-
-public delegate void killedPlayer(PlayerHealth player);
-public delegate void killedEnemy(PlayerHealth player, EnemyHealth enemy);
-
 public class EnemyManager : NetworkBehaviour
 {
-	// The players to track and kill
-    private PlayerHealth[] playersToFollow;
-    public GameObject enemy;
-	private bool shouldSpawnEnemies = false;
-    public float spawnTime = 3f;
-    public Transform[] spawnPoints;
+	/// The specific enemy assoicated wiht the manager set in the scene
+	public GameObject enemy;
 
-	public void reset() {
-		playersToFollow = null;
-		enemy = null;
-		spawnPoints = null;
-	}
+	/// How fast enemies will spawn set in the scene
+	public float spawnTime = 3f;
+
+	/// Spawn points for the manager, for now one, eventually many
+	public Transform[] spawnPoints;
+
+
+	/// The players to track and kill. Interact with game manager to get players
+    private PlayerHealth[] playersToFollow;
+	
 
 	public void start() {
 		GameManager gameManager = FindObjectOfType<GameManager>();
-		gameManager.setupEnemyManger (this);
+	//	gameManager.setupEnemyManger (this);
 	}
 
+	public void Update() {}
 
-	// killed a player
+	public void setPlayersToFollow(PlayerHealth[] players) {
+		playersToFollow = players;
+	}
+
+	/// killed a player
 	public void killedPlayer(PlayerHealth health) {
 		List<PlayerHealth> filteredArray = new List<PlayerHealth> ();
 		for (int index = 0; index < playersToFollow.Length; index++) {
@@ -38,24 +40,22 @@ public class EnemyManager : NetworkBehaviour
 		playersToFollow = filteredArray.ToArray();
 	}
 
-	public void setShouldSpawnEnemies(bool shouldSpawnEnemies) {
-		shouldSpawnEnemies = shouldSpawnEnemies;
-	}
-
-	// set things up for the game
-	void OnLevelWasLoaded() {
+	public void startSpawningEnemies() {
 		InvokeRepeating ("Spawn", spawnTime, spawnTime);
 	}
 
-	// spawn the enemies
-    void Spawn ()
-    {
+	public void stopSpawningEnemies() {
+		CancelInvoke ("Spawn");
+	}
+
+	/// spawn the enemies
+    private void Spawn () {
 		if (isServer) {
 			if (playersToFollow.Length <= 0) {
 				return;
 			}
-
 			int spawnPointIndex = Random.Range (0, spawnPoints.Length);
+			print ("EnemySpawned");
 			Network.Instantiate (enemy, spawnPoints [spawnPointIndex].position, spawnPoints [spawnPointIndex].rotation, 0);
 		}
     }

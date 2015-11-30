@@ -9,8 +9,8 @@ public class EnemyMovement : MonoBehaviour
     NavMeshAgent nav;
 
 
-    void Awake ()
-    {
+	// TODO: update to find the closest player and go after him
+    void Awake () {
         player = GameObject.FindGameObjectWithTag ("Player").transform;
         playerHealth = player.GetComponent <PlayerHealth> ();
         enemyHealth = GetComponent <EnemyHealth> ();
@@ -18,14 +18,11 @@ public class EnemyMovement : MonoBehaviour
     }
 
 
-    void Update ()
-    {
-        if(enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
-       	{
+    void Update () {
+        if(enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0) {
             nav.SetDestination (player.position);
         }
-        else
-        {
+        else {
             nav.enabled = false;
         }
     }
